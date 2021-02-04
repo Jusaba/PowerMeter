@@ -13,8 +13,6 @@
 #include "IO.h"
 
 
-
-
 void setup() {
   	#ifdef Debug														//Usamos el puereto serie solo para debugar	
 		Serial.begin(9600);												//Si no debugamos quedan libres los pines Tx, Rx para set urilizados
