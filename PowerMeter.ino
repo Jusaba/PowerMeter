@@ -120,14 +120,14 @@ void loop() {
  		{
  				switch(nVuelta) {
 
-					Case 0:
+					case 0:
 						MensajeServidor("medida-:-Voltimetro-:-"+LeeVoltaje()); 	
 						break;	
-					Case 1:	
+					case 1:	
 						MensajeServidor("medida-:-Amperimetro-:-"+LeeCorriente()); 	
 						break;
  				}
- 				nVuelta++:
+ 				nVuelta++;
  				if ( nVuelta == 2)
  				{
  					nVuelta = 0;
