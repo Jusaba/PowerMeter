@@ -122,7 +122,6 @@ void loop() {
 
 		}	
 		delay(1000);
-
  		/*----------------
  		Analisis comandos
  		------------------*/
