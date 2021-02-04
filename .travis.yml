@@ -1,0 +1,23 @@
+dist: xenial
+sudo: required
+install: true
+language: java
+branches:
+  only:
+    - master
+script:
+  - git pull
+  - nLinea=$(grep "#define VBuild" -n ServerPic.h | cut -d ":" -f 1 )
+  - sed -i "${nLinea} d" ServerPic.h
+  - sed -i "${nLinea} s|^|\t#define VBuild  \"${TRAVIS_BUILD_NUMBER}\"\n|" ServerPic.h
+  - git add ServerPic.h
+  - git commit -m "[skip ci] Compilacion version $TRAVIS_BUILD_NUMBER"
+  - git push https://${GH_TOKEN}@github.com/oscarsm91/PowerMeter HEAD:master
+  - mkdir librerias
+  - git clone https://${GH_TOKEN}@github.com/oscarsm91/LibreriasServerpic $TRAVIS_BUILD_DIR/librerias
+  - docker run -v $TRAVIS_BUILD_DIR/librerias:/root/Arduino/libraries/serverpic -v $TRAVIS_BUILD_DIR:/home/bin/esp8266 --env-file parametros.env  -i jusaba/esp8266-cli:latest
+  - cIno=$(grep "_ino" parametros.env | cut -d "=" -f 2 )
+  - cInoVersion=$cIno"_$TRAVIS_BUILD_NUMBER.bin"
+  - cIno=$cIno".bin"
+  - mv $cIno $cInoVersion
+  - curl -F "file=@$TRAVIS_BUILD_DIR/$cInoVersion" http://picservertest.jusaba.es:2001/firmware
