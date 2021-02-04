@@ -12,6 +12,7 @@
 #include "ServerPic.h"
 #include "IO.h"
 
+int nVuelta = 0;
 
 void setup() {
   	#ifdef Debug														//Usamos el puereto serie solo para debugar	
@@ -117,9 +118,20 @@ void loop() {
  		------------------*/
  		if (lOnOff)															//Si tenemos habilitado el termostato										
  		{
-				MensajeServidor("medida-:-Voltimetro-:-"+LeeVoltaje()); 	
-				MensajeServidor("medida-:-Amperimetro-:-"+LeeCorriente()); 	
+ 				switch(nVuelta) {
 
+					Case 0:
+						MensajeServidor("medida-:-Voltimetro-:-"+LeeVoltaje()); 	
+						break;	
+					Case 1:	
+						MensajeServidor("medida-:-Amperimetro-:-"+LeeCorriente()); 	
+						break;
+ 				}
+ 				nVuelta++:
+ 				if ( nVuelta == 2)
+ 				{
+ 					nVuelta = 0;
+ 				}
 		}	
 		delay(1000);
  		/*----------------
