@@ -74,7 +74,7 @@
 	//CARACTERISTICAS DISPOSITIVO
 	//----------------------------
 	#define VIno "1.0"						//Version del programa principal
-	#define VBuild  "5"
+	#define VBuild  "6"
 	//---------------------------------
 	//CARACTERISTICAS DE LA COMPILACION
 	//--------------------------------
