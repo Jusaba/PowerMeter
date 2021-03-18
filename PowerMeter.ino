@@ -21,11 +21,9 @@ void setup() {
 	#endif
 	EEPROM.begin(256);													//Reservamos zona de EEPROM
 																		//Ampliamos la zona de EEPROM para almacenar umbrales de todos los sensores	
-
 	//BorraDatosEprom ( 0, 256);											//Borramos 128 bytes empezando en la posicion 0		
 
   	pinMode(PinReset, INPUT_PULLUP);           							//Configuramos el pin de reset como entrada
-
 
 
 	if ( LeeByteEprom ( FlagConfiguracion ) == 0 )						//Comprobamos si el Flag de configuracion esta a 0
@@ -116,19 +114,26 @@ void loop() {
  		/*----------------
  		Medida del snesor
  		------------------*/
+//lOnOff=0;
+
  		if (lOnOff)															//Si tenemos habilitado el termostato										
  		{
  				switch(nVuelta) {
-
 					case 0:
 						MensajeServidor("medida-:-Voltimetro-:-"+LeeVoltaje()); 	
 						break;	
 					case 1:	
 						MensajeServidor("medida-:-Amperimetro-:-"+LeeCorriente()); 	
 						break;
+					case 2:	
+						MensajeServidor("medida-:-Potencia-:-"+LeePotencia()); 	
+						break;
+					case 3:	
+						MensajeServidor("medida-:-Energia-:-"+LeeEnergia()); 	
+						break;
  				}
  				nVuelta++;
- 				if ( nVuelta == 2)
+ 				if ( nVuelta == 4)
  				{
  					nVuelta = 0;
  				}

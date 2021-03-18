@@ -15,8 +15,8 @@
 
 	
 		int PinReset = 0;												//Pin empleado para pulsador reset			
-		int PinTXSensor = 5;
-		int PinRXSensor = 4;
+		int PinTXSensor = 14;
+		int PinRXSensor = 16;
 
 
 
