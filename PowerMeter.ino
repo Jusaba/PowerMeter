@@ -14,6 +14,15 @@
 
 int nVuelta = 0;
 
+						String voltage;
+    					String current;
+    					String power;
+    					String energy;
+    					String frequency;
+    					String pf;
+
+
+
 void setup() {
   	#ifdef Debug														//Usamos el puereto serie solo para debugar	
 		Serial.begin(9600);												//Si no debugamos quedan libres los pines Tx, Rx para set urilizados
@@ -116,20 +125,40 @@ void loop() {
  		------------------*/
 //lOnOff=0;
 
+
  		if (lOnOff)															//Si tenemos habilitado el termostato										
  		{
  				switch(nVuelta) {
 					case 0:
-						MensajeServidor("medida-:-Voltimetro-:-"+LeeVoltaje()); 	
-						break;	
+						voltage = LeeVoltaje();
+    					current = LeeCorriente();
+    					power = LeePotencia();
+    					energy = LeeEnergia();
+    					frequency = LeeFrecuencia();
+    					pf = LeeFactorPotencia();
+						MensajeServidor("medida-:-Voltimetro-:-"+voltage);
+						MensajeServidor("medida-:-Amperimetro-:-"+current);
+						MensajeServidor("medida-:-Potencia-:-"+power);
+						MensajeServidor("medida-:-Energia-:-"+energy);
+						MensajeServidor("medida-:-Frecuencia-:-"+frequency);
+						MensajeServidor("medida-:-FactorPotencia-:-"+pf);
 					case 1:	
+						//MensajeServidor("medida-:-Amperimetro-:-"+LeeCorriente()); 	
+/*
+						MensajeServidor("medida-:-Voltimetro-:-"+LeeVoltaje()); 
+						delay(25);
 						MensajeServidor("medida-:-Amperimetro-:-"+LeeCorriente()); 	
+						delay(25);
+						MensajeServidor("medida-:-Potencia-:-"+LeePotencia());	
+						delay(25);
+						MensajeServidor("medida-:-Energia-:-"+LeeEnergia());						
+*/
 						break;
 					case 2:	
-						MensajeServidor("medida-:-Potencia-:-"+LeePotencia()); 	
+						//MensajeServidor("medida-:-Potencia-:-"+LeePotencia()); 	
 						break;
 					case 3:	
-						MensajeServidor("medida-:-Energia-:-"+LeeEnergia()); 	
+						//MensajeServidor("medida-:-Energia-:-"+LeeEnergia()); 	
 						break;
  				}
  				nVuelta++;

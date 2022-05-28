@@ -74,7 +74,7 @@
 	//CARACTERISTICAS DISPOSITIVO
 	//----------------------------
 	#define VIno "1.0"						//Version del programa principal
-	#define VBuild  "6"
+	#define VBuild  "11"
 	//---------------------------------
 	//CARACTERISTICAS DE LA COMPILACION
 	//--------------------------------
@@ -225,7 +225,7 @@ String LeeVoltaje (void)
 	char buffer[5];	
     Voltaje = pzem.voltage();
     if( !isnan(Voltaje) ){
-        cValor = dtostrf(Voltaje, 1, 1, buffer);
+        cValor = dtostrf(Voltaje, 6, 2, buffer);
     } else {
         cValor = "Error";
     }	
@@ -238,7 +238,7 @@ String LeeFrecuencia (void)
 	char buffer[5];		
     Frecuencia = pzem.frequency();
     if( !isnan(Frecuencia) ){
-        cValor = dtostrf(Frecuencia, 1, 1, buffer);
+        cValor = dtostrf(Frecuencia, 5, 2, buffer);
     } else {
         Serial.println("Error");
     }
@@ -250,7 +250,7 @@ String LeeCorriente (void)
 	char buffer[5];		
     Corriente = pzem.current();
     if( !isnan(Corriente) ){
-        cValor = dtostrf(Corriente, 1, 1, buffer);
+        cValor = dtostrf(Corriente, 5, 2, buffer);
     } else {
         Serial.println("Error");
     }
@@ -262,7 +262,7 @@ String LeePotencia (void)
 	char buffer[5];		
     Potencia = pzem.power();
     if( !isnan(Potencia) ){
-        cValor = dtostrf(Potencia, 1, 1, buffer);
+        cValor = dtostrf(Potencia, 7, 2, buffer);
     } else {
         Serial.println("Error");
     }
@@ -274,7 +274,7 @@ String LeeEnergia (void)
 	char buffer[5];		
     Energia = pzem.energy();
     if( !isnan(Energia) ){
-        cValor = dtostrf(Energia, 1, 1, buffer);
+        cValor = dtostrf(Energia, 9, 2, buffer);
     } else {
         Serial.println("Error");
     }
@@ -284,9 +284,9 @@ String LeeFactorPotencia (void)
 {
 	String cValor;
 	char buffer[5];		
-    FactorPotencia = pzem.energy();
+    FactorPotencia = pzem.pf();
     if( !isnan(FactorPotencia) ){
-        cValor = dtostrf(FactorPotencia, 1, 1, buffer);
+        cValor = dtostrf(FactorPotencia, 4, 2, buffer);
     } else {
         Serial.println("Error");
     }
